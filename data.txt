@@ -1,4 +1,1 @@
-query_id=AAHsA19fAAAAAOwDX1_9WVHI&user=%7B%22id%22%3A1600062444%2C%22first_name%22%3A%22Yakalofik%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22W_BUSD%22%2C%22language_code%22%3A%22en%22%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1716300226&hash=2eb86000d2d610bcfd9203d8ae26f22f9df9324cc118d9eebccdcf950966ef25
-query_id=AAF0KotBAAAAAHQqi0GCCobr&user=%7B%22id%22%3A1099639412%2C%22first_name%22%3A%22Adinda%22%2C%22last_name%22%3A%22Aprilia%22%2C%22username%22%3A%22dindajg_06%22%2C%22language_code%22%3A%22en%22%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1716344584&hash=df9cfc0c83f7ab53157446d999f05e05b5c3ec5d810bbae576e4cff4091f4731
-
-
+query_id=
