@@ -15,7 +15,7 @@ biru = Fore.LIGHTBLUE_EX
 reset = Style.RESET_ALL
 
 class CubeTod:
-    def __init__(self):
+    def __init__(self, min_energy=100, interval=10, sleep=200):
         self.headers = {
             'content-length': '0',
             'user-agent': '',
@@ -29,16 +29,16 @@ class CubeTod:
             'referer': 'https://www.thecubes.xyz/',
             'accept-language': 'en,en-US;q=0.9',
         }
+        self.min_energy = min_energy
+        self.interval = interval
+        self.sleep = sleep
 
     def main(self):
         banner = f"""
-    
-    {putih}AUTO MINE {hijau}CUBE {putih}/ {hijau}@cubesonthewater_bot
-    
-    {putih}By: {hijau}t.me/AkasakaID
-    {putih}Github: {hijau}@AkasakaID
-    
-    {hijau}Message: {putih}don't forget to 'git pull' maybe i update the bot!
+        {putih}AUTO MINE {hijau}CUBE {putih}/ {hijau}@cubesonthewater_bot
+        {putih}By: {hijau}t.me/AkasakaID
+        {putih}Github: {hijau}@AkasakaID
+        {hijau}Message: {putih}don't forget to 'git pull' maybe I update the bot!
         """
         
         if len(sys.argv) <= 1:
@@ -76,19 +76,15 @@ class CubeTod:
             self.log(f"{merah}No valid login data found. Exiting.")
             sys.exit()
 
-        config = json.loads(open('config.json', 'r').read())
-        self.min_energy = int(config['min_energy'])
-        interval = int(config['interval'])
-        sleep = int(config['sleep'])
         while True:
             for token in tokens:
                 print('~' * 50)
                 res = self.mine(token)
                 if isinstance(res, str):
                     if res == 'limit':
-                        self.countdown(sleep)
+                        self.countdown(self.sleep)
                         continue
-                self.countdown(interval)
+                self.countdown(self.interval)
 
     def log(self, message):
         year, mon, day, hour, minute, second, a, b, c = time.localtime()
@@ -130,7 +126,6 @@ class CubeTod:
                 self.log(f"{hijau}remaining energy : {putih}{energy}")
                 if int(energy) <= self.min_energy:
                     return 'limit'
-                
                 return True
         
         self.log(f"{merah}failed to mine, http status code : {kuning}{res.status_code}")
@@ -163,7 +158,6 @@ class CubeTod:
                 if data is None:
                     res = requests.get(url, headers=headers)
                     return res
-
                 res = requests.post(url, headers=headers, data=data)
                 return res
             except (
@@ -176,7 +170,16 @@ class CubeTod:
 
 if __name__ == "__main__":
     try:
-        app = CubeTod()
+        interval = input("Enter interval (default 10): ")
+        min_energy = input("Enter minimum energy (default 100): ")
+        sleep = input("Enter sleep duration (default 200): ")
+
+        interval = int(interval) if interval else 10
+        min_energy = int(min_energy) if min_energy else 100
+        sleep = int(sleep) if sleep else 200
+
+        app = CubeTod(min_energy=min_energy, interval=interval, sleep=sleep)
         app.main()
     except KeyboardInterrupt:
         sys.exit()
+
